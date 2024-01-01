@@ -50,3 +50,18 @@ export const getSingleUser = async (req,res,next)=>{
         next(error);
     }
 }
+
+
+export const getEducationDetails = async (req,res,next)=>{
+    console.log(req.body)
+    const {college,degree,field,school,year } =  req.body;
+    try {
+        const singleUser =  await User.findOneAndUpdate({"email":req.body.email},
+            {"educationDetails":{college,degree,field,school,year}})
+        res.status(200).json({"status":201,"message":"Education details updated"})
+       } catch (error) {
+        console.log(error);
+       // next(error);
+    }
+}
+

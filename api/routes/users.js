@@ -1,7 +1,8 @@
 import express from 'express';
 import user from '../models/user.js';
 import {createError} from '../utils/error.js';
-import { createUser, deleteUser, getUser, getSingleUser, updateUser } from '../controllers/user.js';
+import { createUser, deleteUser, getUser, getSingleUser, updateUser,
+    getEducationDetails } from '../controllers/user.js';
 const router = express.Router();
 
 
@@ -15,6 +16,9 @@ router.delete("/:id", deleteUser);
 router.get("/:id",getSingleUser) ;
 //GET ALL
 router.get("/", getUser) ;
+
+//SUBMIT EDUCATION DETIALS 
+router.post("/eduDetails",getEducationDetails)
 
   
 
