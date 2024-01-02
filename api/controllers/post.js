@@ -73,9 +73,10 @@ export const applyPost = async(req,res)=>{
 export const getAppliedPost = async(req,res)=>{
     const email = req.body.email;
     try {
-        const singleUser =  await User.find({"email":email})
-        console.log(singleUser)
-        res.status(200).json({"status":201,"appiedPost":singleUser.appliedFor})
+        const singleUser =  await User.findOne({"email":email})
+        const arrayToFind = singleUser.appliedFor;
+        const appliedPost = await Post.find({"_id":{"$in":arrayToFind}})
+        res.status(200).json({"status":201,"appliedPost":appliedPost})
        } catch (error) {
         console.log(error);
        // next(error);
