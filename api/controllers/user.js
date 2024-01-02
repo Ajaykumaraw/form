@@ -1,4 +1,9 @@
 import User from "../models/user.js";
+import fs from "fs";
+
+let imagefolder = "filename3";
+ let uploadPath = `uploads/${imagefolder}`;
+
 
 export const createUser = async (req,res,next)=>{
     console.log(req.body)
@@ -64,4 +69,26 @@ export const getEducationDetails = async (req,res,next)=>{
        // next(error);
     }
 }
+
+
+export const saveFilePathInDb = async (email,filename)=>{
+    try {
+        const singleUser =  await User.findOneAndUpdate({"email":email}, { $push:{"documents":`${"/"+filename}`}})
+       // res.status(200).json({"status":201,"message":"documents updated"})
+       } catch (error) {
+        console.log(error);
+       // next(error);
+    }
+}
+
+export const showImages = async (req, res)=>{
+    
+      //  const imageName = req.params.imageName;
+        const imagePath = __dirname + '/uploads/filename3'+1704171729736-slider1.png;
+      
+        // Send the image file in the response
+        res.sendFile(imagePath);
+}
+
+
 

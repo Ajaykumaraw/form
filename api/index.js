@@ -41,6 +41,8 @@ mongoose.connection.on("connected", ()=>{
 //     res.send("i am working bro!!");
 // })
 app.use(express.json());
+app.use(express.static('public'));
+
 app.use("/api/auth",authRoutes);
 app.use("/api/user",usersRoutes);
 app.use("/api/post",postRoutes);
